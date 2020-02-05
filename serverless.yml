@@ -1,0 +1,25 @@
+
+service: sms-lambda
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: us-west-2
+  environment:
+    TWILIO_ACCOUNT_SID: 
+    TWILIO_AUTH_TOKEN: 
+    TWILIO_PHONE_NUMBER:
+
+functions:
+  sendMessage:
+    handler: handler.sendMessage
+    events:
+      - http:
+          path: api/sendMessage
+          method: post
+          integration: lambda
+          cors: true
+
+package:
+  exclude:
+    - '!node_modules/twilio/**'
